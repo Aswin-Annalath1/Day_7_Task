@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        var request= new XMLHttpRequest()
+        request.open('GET','https://restcountries.com/v3.1/all')
+        request.send()
+        request.onload = function(){
+            var data = JSON.parse(request.response)
+             
+
+    //a. Get all the countries from Asia continent /region using Filter function
+
+            console.log(data.filter((el)=>el.region=="Asia"))
+               
+    //b. Get all the countries with a population of less than 2 lakhs using Filter function
+
+            console.log(data.filter((el)=>el.population<200000))
+
+    //c. Print the following details name, capital, flag using forEach function
+
+            data.forEach((el)=>console.log(`Name:${el.name.common}, Capitals:${el.capital}, Flag:${el.flag}`))
+
+    //d. Print the total population of countries using reduce function
+
+            console.log(data.reduce((acc,cv)=>acc+cv.population,0))
+
+    //e. Print the country which uses US Dollars as currency.
+
+            var res=data.filter((el)=>el.currencies)
+            
+            console.log(res.filter((ele)=>ele.currencies.USD))
+                
+
+
+        }
+    
+
+    </script>
+</body>
+</html>
